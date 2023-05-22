@@ -1,39 +1,26 @@
 <?php
-require_once('config.php');
 
-// insert, update, delete, select
-// SQL: insert, update, delete
-function execute($sql) {
-	//open connection
-	$conn = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);
-	mysqli_set_charset($conn, 'utf8');
+$servername = "localhost";
+$username = "mamp";
+$password = "Pewpew321.";
+$dbname ="OnlineStore";
 
-	//query
-	mysqli_query($conn, $sql);
-
-	//close connection
-	mysqli_close($conn);
+// Create connection
+$conn =  mysqli_connect($servername, $username, $password);
+// Check connection
+if ($conn->connect_error) {
+  die("Connection failed: " . $conn->connect_error);
 }
 
-// SQL: select -> lay du lieu dau ra (select danh sach ban ghi, lay 1 ban ghi)
-function executeResult($sql, $isSingle = false) {
-	$data = null;
-
-	//open connection
-	$conn = mysqli_connect(HOST, USERNAME, PASSWORD, DATABASE);
-	mysqli_set_charset($conn, 'utf8');
-
-	//query
-	$resultset = mysqli_query($conn, $sql);
-	if($isSingle) {
-		$data = mysqli_fetch_array($resultset, 1);
-	} else {
-		$data = [];
-		while(($row = mysqli_fetch_array($resultset, 1)) != null) {
-			$data[] = $row;
-		}
-	}
-	//close connection
-	mysqli_close($conn);
-	return $data;
+// Create database
+$sql = "CREATE DATABASE OnlineStore";
+if ($conn->query($sql) === TRUE) {
+  echo "Database created successfully";
+} else {
+  echo "Error creating database: " . $conn->error;
 }
+
+$conn->close();
+
+
+?>

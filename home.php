@@ -1,10 +1,9 @@
-<?php include('processDB/createDB.php'); ?>
+
+
 
 <?php
-  require_once('Utils/utility.php');
-  require_once('processDB/dbhelper.php');
-  $sql = "select _Product.*, _Category.name as category_name from _Product left join _Category on _Product.category_id = _Category.id order by _Product.updated_at desc limit 0,8";
-  $lastestItems = executeResult($sql);
+  // require_once('processDB/dbhelper.php');
+  include('processDB/createDB.php');
 ?> 
 
 <!DOCTYPE html>
@@ -13,9 +12,9 @@
   <link rel="stylesheet" href="style.css">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet">
   <script src="webimage/https://kit.fontawesome.com/13ae3a08e3.js" crossorigin="anonymous"></script>
-  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-J3qI0YbBvkZ2xuA6OlnQzjr/YOebeubEUyTADTbJssO+yOj8jcT0rL+FbEfmzGtX1nNfMTTpjKwNtqAVn/cC8g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://kit.fontawesome.com/13ae3a08e3.js" crossorigin="anonymous"></script>
 </head>
-
 <body>
   <header>
     <a class="logo" href="#"><svg xmlns="http://www.w3.org/2000/svg" width="120" height="60">
@@ -30,16 +29,24 @@
         <li><a class="button" href="index.php?page=contact">Contact</a></li>
         <div class="dropdown">
           <span>
-            <li><a class="button" href="index.php?page=products">Products</a></li>
+            <li><a class="button" href="products.php?page=1">Products</a></li>
           </span>
           <div class="dropdown-content">
+            
             <p>Hello World!</p>
           </div>
         </div>
       </ul>
     </nav>
-    <li><a id="login" class="button" href="index.php?page=login">Log In</a></li>
-    <li><a class="button" href="index.php?page=logout">Log Out</a></li>
+    <?php
+    session_start();
+    if(isset($_SESSION['username'])) {
+        echo "<div style='text-align: right;'>Logged in as Loc</div>";
+        echo "<li><a class='button' href='index.php?page=logout'>Log Out</a></li>";
+    } else {
+      echo "<li><a class='button' href='index.php?page=login'>Log In</a></li>";
+    }
+?>
   </header>
   <div id="Name" class="container-fluid p-3">
     <h1 id="sneaker_store"> APOLLO STORE </h1>
@@ -79,8 +86,8 @@
         <div class="col-sm-4">
           <p><img height="40px" src="webimage/reshot-icon-social-media-YQH65GLWP4.svg">Like APOLLO on social networks</p>
           <ul class="socials">
-            <li><a href="#"><i class="fa-brands fa-facebook"></i></a></li>
-            <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+            <li><a href="https://www.facebook.com/loc.le22521/"><i class="fa-brands fa-facebook"></i></a></li>
+            <li><a href="https://www.instagram.com/_.blackcat22521/"><i class="fa-brands fa-instagram"></i></a></li>
             <li><a href="#"><i class="fa-brands fa-twitter"></i></a></li>
             <li><a href="#"><i class="fa-brands fa-telegram"></i></a></li>
             <li><a href="#"><i class="fa-brands fa-google-plus-g"></i></a></li>
